@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-// use App\Models\User;
+use App\Models\User;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
@@ -17,10 +17,7 @@ class UserController extends ResourceController
     public function signin()
     {
         $request = $this->request->getJSON();
-        // $users = new User();
-        $users = new \App\Models\User();
-
-        var_dump($users);
+        $users = new User();
 
         $email = $request->email;
         $password = $request->password;
@@ -50,18 +47,13 @@ class UserController extends ResourceController
     public function signup()
     {
         $request = $this->request->getJSON();
-        // $users = new User();
-        $users = new \App\Models\User();
+        $users = new User();
 
-        var_dump($users);
-
-        $id = rand(1, 9999999999);
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
         
         $data = [
-            'id' => $id,
             'name' => $name,
             'email' => $email,
             'password' => password_hash($password, PASSWORD_DEFAULT) 
@@ -78,7 +70,7 @@ class UserController extends ResourceController
             );
         }
 
-        $result = $users->save($data);
+        $result = $users->insert($data);
 
         if (!$result) {
             return $this->respond('', 404);

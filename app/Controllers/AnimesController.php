@@ -3,29 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\Anime;
-use App\Models\User;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
-class AnimesWatched extends ResourceController
+class AnimesController extends ResourceController
 {
     
     use ResponseTrait;
-    protected $modelName = '\App\Models\Anime';
-    
-    /**
-     *  Retorna todos os animes
-     */
-    public function index()
-    {
-        $users = new User();
-        return $this->respond(
-            [
-                'users' => $users->findAll(),
-            ],
-            200
-        );
-    }
 
     /**
      * Find All Animes
@@ -55,18 +39,19 @@ class AnimesWatched extends ResourceController
     {
         $request = $this->request->getJSON();
         $data = [
-            'id' => rand(1, 9999999999),
+            
             'name' => $request->name,
             'year' => $request->year,
-            'url_image' => $request->url_image,
+            // 'description' => $request->description,
+            // 'url_image' => $request->url_image,
         ];
 
         $anime_model = new Anime();
         $result = $anime_model->insert($data);
 
-        // if (!$result) {
-        //     return $this->respond('', 404);
-        // }
+        if (!$result) {
+            return $this->respond('', 404);
+        }
 
         return $this->respond(
             [
