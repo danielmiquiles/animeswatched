@@ -11,6 +11,7 @@ class CreateTableChapters extends Migration
 		$this->forge->addField([
 			'id' => [
 				'type' => 'int',
+				'auto_increment' => true
 			],
 			'chapter_number' => [
 				'type' => 'int',
@@ -21,10 +22,10 @@ class CreateTableChapters extends Migration
 				'null' => false
 			],
 			'updated_at' => [
-                'type' => 'timestamp',
+                'type' => 'datetime',
                 'null' => true,
             ],
-        'created_at timestamp default CURRENT_TIMESTAMP',
+        'created_at datetime default CURRENT_TIMESTAMP',
 		]);
 		$this->forge->addKey('id');
         $this->forge->createTable('chapters');

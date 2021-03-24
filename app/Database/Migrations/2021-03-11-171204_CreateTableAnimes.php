@@ -11,11 +11,16 @@ class CreateTableAnimes extends Migration
 		$this->forge->addField([
 			'id' => [
 				'type' => 'int',
+				'auto_increment' => true
 			],
 			'name' => [
 				'type' => 'varchar',
 				'constraint' => 100,
 				'null' => false,
+			],
+			'description' => [
+				'type' => 'text',
+				'null' => true,
 			],
 			'year' => [
 				'type' => 'varchar',
@@ -28,10 +33,10 @@ class CreateTableAnimes extends Migration
 				'null' => true,
 			],
 			'updated_at' => [
-                'type' => 'timestamp',
+                'type' => 'datetime',
                 'null' => true,
             ],
-        'created_at timestamp default CURRENT_TIMESTAMP',
+        'created_at datetime default CURRENT_TIMESTAMP',
 		]);
 		$this->forge->addKey('id');
         $this->forge->createTable('animes');

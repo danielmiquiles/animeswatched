@@ -11,6 +11,7 @@ class CreateTableChaptersUsers extends Migration
 		$this->forge->addField([
 			'id' => [
 				'type' => 'int',
+				'auto_increment' => true
 			],
 			'anime_id' => [
 				'type' => 'int',

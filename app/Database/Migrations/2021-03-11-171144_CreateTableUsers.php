@@ -11,6 +11,7 @@ class CreateTableUsers extends Migration
 		$this->forge->addField([
             'id' => [
 				'type' => 'int',
+                'auto_increment' => true
 			],
             'name' => [
                 'type' => 'varchar',
@@ -27,10 +28,10 @@ class CreateTableUsers extends Migration
                 'null' => true,
 			],
 			'updated_at' => [
-                'type' => 'timestamp',
+                'type' => 'datetime',
                 'null' => true,
             ],
-        'created_at timestamp default CURRENT_TIMESTAMP',
+        'created_at datetime default CURRENT_TIMESTAMP',
         ]);
         $this->forge->addKey('id');
         $this->forge->createTable('users');
