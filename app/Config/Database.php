@@ -32,11 +32,11 @@ class Database extends Config
 	 */
 	public $default = [
 		'DSN'      => '',
-		'hostname' => 'ec2-23-21-229-200.compute-1.amazonaws.com',
-		'username' => 'ybofnxykwgdpok',
-		'password' => 'e97ce87edc0b7c2b3a6b1cf90a6a7ffc5b53aca1ce20f83df8a49426dcafa4e5',
-		'database' => 'dbs5a6in0lnb8i',
-		'DBDriver' => 'Postgre',
+		'hostname' => 'localhost',
+		'username' => '',
+		'password' => '',
+		'database' => '',
+		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
 		'DBDebug'  => (ENVIRONMENT !== 'production'),
@@ -47,7 +47,7 @@ class Database extends Config
 		'compress' => false,
 		'strictOn' => false,
 		'failover' => [],
-		'port'     => 5432,
+		'port'     => 3306,
 	];
 
 	/**

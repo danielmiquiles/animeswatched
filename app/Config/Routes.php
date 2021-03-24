@@ -32,22 +32,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-
-// $routes->get('/', 'Home::index');
-// $routes->get('/', 'AnimesWatched::index');
-
-$routes->group('api', function($routes){
-
-    $routes->group('animes', function($routes){
-        $routes->get('', 'AnimesWatched::findAllAnimes');
-        $routes->post('new', 'AnimesWatched::store');
-    });
-
-    $routes->post('signin', 'UserController::signin');    
-    $routes->post('signup', 'UserController::signup');    
-
-});
-
+$routes->get('/', 'Home::index');
 
 /*
  * --------------------------------------------------------------------

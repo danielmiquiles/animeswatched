@@ -23,9 +23,8 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-  
-	public $baseURL = 'https://testeanimes.herokuapp.com/';
-  
+	public $baseURL = 'http://localhost:8080/';
+
 	/**
 	 * --------------------------------------------------------------------------
 	 * Index File
