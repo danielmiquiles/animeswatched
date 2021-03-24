@@ -8,7 +8,7 @@ class Anime extends Model
 {
     protected $table = 'animes';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['id','name', 'year', 'url_image', 'updated_at'];
+    protected $allowedFields = ['name', 'year', 'url_image', 'updated_at'];
 
 }
 
