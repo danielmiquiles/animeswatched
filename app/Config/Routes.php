@@ -43,7 +43,8 @@ $routes->group('api', function ($routes) {
 	});
 
 	$routes->group('user', function ($routes) {
-		$routes->delete('delete/(:num)', 'UserController::delete/$1');
+		$routes->delete('/(:num)', 'UserController::delete/$1');
+		$routes->put('/(:num)', 'UserController::edit/$1');
 	});
 });
 
