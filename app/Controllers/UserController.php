@@ -153,14 +153,44 @@ class UserController extends ResourceController
      */
     public function edit($id = null)
     {
+        $request = $this->request->getJSON();
         $users = new User();
 
-        $result = $users->delete($id);
+        $name = isset($request->name) ? $request->name : null ;
+        $email = isset($request->email) ? $request->email : null ;
+        $password = isset($request->password) ? $request->password : null ;
 
-        if (!$result) {
-            return $this->respond('', 404);
+        if(empty($name)){
+            return $this->respond(['error' => 'name field is required'],404);
         }
+        if(empty($email)){
+            return $this->respond(['error' => 'email field is required'],404);
+        }
+        if(empty($password)){
+            return $this->respond(['error' => 'password field is required'],404);
+        }
+        
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT) 
+        ];
 
-        return $this->respond($result, 200);
+        $user = $users->where('email',$email)->findAll();
+
+        if($user){
+
+            $result = $users->update($id, $data);
+
+            if (!$result) {
+                return $this->respond('', 404);
+            }
+    
+            return $this->respond($result, 200);
+            
+        } else {
+
+            return $this->respond(['error' => 'user not registered'],404);
+        }
     }
 }
