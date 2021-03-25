@@ -12,7 +12,7 @@ class UserController extends ResourceController
     
     
     /**
-     *  Retorna todos os animes
+     *  Return user if exists
      */
     public function signin()
     {
@@ -70,7 +70,7 @@ class UserController extends ResourceController
     }
 
     /**
-     *  Retorna todos os animes
+     *  Create a new user
      */
     public function signup()
     {
@@ -130,5 +130,37 @@ class UserController extends ResourceController
         }
 
         return $this->respond('', 201);
+    }
+
+    /**
+     *  Delete a user
+     */
+    public function delete($id = null)
+    {
+        $users = new User();
+
+        $result = $users->delete($id);
+
+        if (!$result) {
+            return $this->respond('', 404);
+        }
+
+        return $this->respond($result, 200);
+    }
+
+    /**
+     *  Delete a user
+     */
+    public function edit($id = null)
+    {
+        $users = new User();
+
+        $result = $users->delete($id);
+
+        if (!$result) {
+            return $this->respond('', 404);
+        }
+
+        return $this->respond($result, 200);
     }
 }

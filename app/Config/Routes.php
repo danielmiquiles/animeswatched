@@ -33,13 +33,18 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 $routes->group('api', function ($routes) {
+
+	$routes->post('signup', 'UserController::signup');
+	$routes->post('signin', 'UserController::signin');
+
 	$routes->group('animes', function ($routes) {
 		$routes->get('', 'AnimesController::findAllAnimes');
 		$routes->post('new', 'AnimesController::store');
 	});
 
-	$routes->post('signin', 'UserController::signin');
-	$routes->post('signup', 'UserController::signup');
+	$routes->group('user', function ($routes) {
+		$routes->delete('delete/(:num)', 'UserController::delete/$1');
+	});
 });
 
 /*

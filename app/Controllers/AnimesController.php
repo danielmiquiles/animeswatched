@@ -40,10 +40,10 @@ class AnimesController extends ResourceController
         $request = $this->request->getJSON();
         $data = [
             
-            'name' => $request->name,
-            'year' => $request->year,
-            // 'description' => $request->description,
-            // 'url_image' => $request->url_image,
+            'name' => isset($request->name)? $request->name : null ,
+            'year' => isset($request->year)? $request->year : null ,
+            'description' => isset($request->description)? $request->description : null ,
+            'url_image' => isset($request->url_image)? $request->url_image : null ,
         ];
 
         $anime_model = new Anime();
@@ -57,7 +57,8 @@ class AnimesController extends ResourceController
             [
                 'message' => 'success'
             ], 
-            201);
+            201
+        );
     }
 
     /**
