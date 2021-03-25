@@ -19,26 +19,54 @@ class UserController extends ResourceController
         $request = $this->request->getJSON();
         $users = new User();
 
-        $email = $request->email;
-        $password = $request->password;
+        $email = isset($request->email) ? $request->email : null ;
+        $password = isset($request->password) ? $request->password : null ;
 
-        $user = $users->where('password',$password)->where('email', $email)->findAll();
-
-        if(empty($user)){
+        if(empty($email)){
             return $this->respond(
                 [
-                    'error' => 'user not registered'
+                    'error' => 'email field is required'
+                ],
+                 404
+            );
+        }
+        if(empty($password)){
+            return $this->respond(
+                [
+                    'error' => 'password field is required'
                 ],
                  404
             );
         }
 
-        return $this->respond(
-            [
-                'user' => $user
-            ], 
-            200
-        );
+        $user = $users->where('email', $email)->findAll();
+        $password_hash = $user[0]['password'];
+
+        if(password_verify($password, $password_hash)){
+
+            if(empty($user)){
+                return $this->respond(
+                    [
+                        'error' => 'user not registered'
+                    ],
+                     404
+                );
+            }
+
+            return $this->respond(
+                [
+                    'user' => $user
+                ], 
+                200
+            );
+        } else {
+            return $this->respond(
+                [
+                    'error' => 'invalid email or invalid password'
+                ],
+                 404
+            );
+        }        
     }
 
     /**
@@ -49,9 +77,34 @@ class UserController extends ResourceController
         $request = $this->request->getJSON();
         $users = new User();
 
-        $name = $request->name;
-        $email = $request->email;
-        $password = $request->password;
+        $name = isset($request->name) ? $request->name : null ;
+        $email = isset($request->email) ? $request->email : null ;
+        $password = isset($request->password) ? $request->password : null ;
+
+        if(empty($name)){
+            return $this->respond(
+                [
+                    'error' => 'name field is required'
+                ],
+                 404
+            );
+        }
+        if(empty($email)){
+            return $this->respond(
+                [
+                    'error' => 'email field is required'
+                ],
+                 404
+            );
+        }
+        if(empty($password)){
+            return $this->respond(
+                [
+                    'error' => 'password field is required'
+                ],
+                 404
+            );
+        }
         
         $data = [
             'name' => $name,
@@ -59,9 +112,9 @@ class UserController extends ResourceController
             'password' => password_hash($password, PASSWORD_DEFAULT) 
         ];
 
-        $user = $users->where('name',$name)->where('email', $email)->findAll();
+        $user = $users->where('email',$email)->findAll();
 
-        if(!empty($user)){
+        if($user){
             return $this->respond(
                 [
                     'error' => 'user already registered'
