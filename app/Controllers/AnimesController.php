@@ -20,7 +20,7 @@ class AnimesController extends ResourceController
         $animes = $anime_model->findAll();
 
         if(!$animes){
-           return $this->respond([''],404); 
+           return $this->respond([''],204); 
         }
 
         return $this->respond(

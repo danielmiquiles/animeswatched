@@ -16,16 +16,21 @@ class CreateTableUsers extends Migration
             'name' => [
                 'type' => 'varchar',
                 'constraint' => '100',
-                'null' => false
+                'null' => false,
             ],
             'email' => [
                 'type' => 'varchar',
 				'constraint' => '100',
-                'null' => true,
+                'null' => false,
             ],
             'password' => [
                 'type' => 'text',
                 'null' => true,
+			],
+            'administrator' => [
+                'type' => 'boolean',
+                'null' => false,
+                'default' => '0',
 			],
 			'updated_at' => [
                 'type' => 'datetime',
